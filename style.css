@@ -1,0 +1,85 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+  height: 100dvh;
+  background-image: url('assets/drink.webp');
+  background-size: 30vw;
+  transform-style: preserve-3d;
+}
+
+.container {
+  width: 3vw;
+  height: 12vw;
+  transform-style: preserve-3d;
+  transform: perspective(300px) rotateX(360deg);
+  transition: transform 3s ease;
+
+  &:hover {
+    transform: perspective(250px) rotateX(270deg);
+
+    .wret {
+      transform: rotateY(calc(360deg / 8 * var(--d))) translateZ(5vw);
+    }
+
+    &+.bottle {
+      visibility: visible;
+    }
+  }
+
+  .wret {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: springgreen;
+    box-shadow: inset 2px 2px 20px #0004, inset -2px -2px 20px #fff4;
+    transition: transform 3s ease;
+
+    &:hover {
+      transform: rotateY(calc(360deg / 8 * var(--d))) translateZ(5vw);
+    }
+  }
+
+  @media (width <=1000px) {
+    transform: scale(3) perspective(200px) rotateX(360deg);
+
+    &:hover {
+      transform: scale(3) perspective(150px) rotateX(270deg);
+
+      .wret {
+        transform: rotateY(calc(360deg / 8 * var(--d))) translateZ(5vw);
+      }
+
+      &+.bottle {
+        width: 5vw;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.bottle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2vw;
+  z-index: 1000;
+  perspective: 0;
+  visibility: hidden;
+  transition: visibility .1s ease, width .2 ease;
+  transition-delay: 2.8s;
+
+
+}
